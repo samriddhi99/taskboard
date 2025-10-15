@@ -1,0 +1,21 @@
+name: Deploy (Simulated)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build frontend
+        run: cd frontend && npm ci && npm run build
+      - name: Build backend Docker image
+        run: docker build -t taskboard-backend ./backend
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-build
+          path: |
+            frontend/dist
+            backend/
