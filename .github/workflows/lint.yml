@@ -1,0 +1,19 @@
+name: Backend Format
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: Install formatter
+        run: pip install black
+      - name: Run black formatter
+        run: black .
