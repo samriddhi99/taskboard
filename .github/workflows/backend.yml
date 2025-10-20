@@ -14,5 +14,5 @@ jobs:
         with:
           python-version: "3.10"
       - run: pip install -r requirements.txt pytest flake8
-      - run: export PYTHONPATH=. && pytest tests
+      - run: export PYTHONPATH=. && pytest
       - run: flake8 backend
