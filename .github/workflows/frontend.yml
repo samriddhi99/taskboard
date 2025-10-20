@@ -1,18 +1,28 @@
-name: Frontend Build and Test
+name: Frontend CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
-  frontend:
+  build-and-test:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
-      - name: Set up Node
-        uses: actions/setup-node@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          node-version: 18
-      - run: cd frontend && npm ci
-      - run: cd frontend && npm run build
-      - run: cd frontend && npx vitest
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      - name: Run frontend tests
+        run: npm test

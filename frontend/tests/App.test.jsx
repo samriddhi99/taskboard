@@ -1,10 +1,10 @@
-import { render } from '@testing-library/react'
-import App from '../src/App'
-import { describe, it, expect } from 'vitest'
+import { render, screen } from "@testing-library/react";
+import { describe, it, expect } from "vitest";
+import App from "../src/App";
 
-describe('App', () => {
-  it('renders title', () => {
-    const { getByText } = render(<App />)
-    expect(getByText('Taskboard')).toBeTruthy()
-  })
-})
+describe("App", () => {
+  it("renders title", () => {
+    render(<App />);
+    expect(screen.getByText(/TaskBoard/i)).toBeInTheDocument();
+  });
+});
